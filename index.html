@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Cover Div</title>
+    <style>
+        .big_cvr {
+            width: 1073.6px;
+            height: 616.6px;
+            background-color: lightgray; /* You can change this to any color or use an image */
+            border: 1px solid #ccc; /* Optional border for visual reference */
+            margin: 0 auto; /* Center the div horizontally */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .big_cvr h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .big_cvr p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .nav_abt {
+            width: 258px;
+            height: 374px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .nav_abt button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .nav_abt button:hover {
+            background-color: #0056b3;
+        }
+        .contact-form, .do-not-sell-form {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+        .contact-form input, .contact-form textarea,
+        .do-not-sell-form input, .do-not-sell-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .contact-form input[type="checkbox"],
+        .do-not-sell-form input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .contact-form button,
+        .do-not-sell-form button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .contact-form button:hover,
+        .do-not-sell-form button:hover {
+            background-color: #0056b3;
+        }
+        .contact-submitted,
+        .do-not-sell-submitted {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="big_cvr">
+        <div>
+            <h1>About eNull</h1>
+            <p>eNull is a unique online marketplace that specializes in the sale of rare and hard-to-find items. 
+            Our platform connects collectors, enthusiasts, and sellers from around the world, providing a space where 
+            extraordinary items can be discovered and treasured. Whether you're looking for antique artifacts, 
+            vintage memorabilia, or one-of-a-kind collectibles, eNull is your destination for the rare and the remarkable.</p>
+            <div class="message" id="message"></div>
+            <div class="contact-form" id="contactForm">
+                <input type="text" id="adLinkId" placeholder="Ad Link or Ad ID">
+                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="phone" placeholder="Phone">
+                <input type="text" id="cellPhone" placeholder="Cell Phone">
+                <input type="email" id="email" placeholder="Email Address">
+                <input type="text" id="subject" placeholder="Subject">
+                <textarea id="messageText" placeholder="Message"></textarea>
+                <label><input type="checkbox" id="notRobot"> I'm not a robot</label>
+                <button onclick="submitContact()">Submit</button>
+            </div>
+            <div class="contact-submitted" id="contactSubmitted">Contact Submitted</div>
+
+            <div class="do-not-sell-form" id="doNotSellForm">
+                <input type="text" id="doNotSellName" placeholder="Name">
+                <input type="text" id="doNotSellPhone" placeholder="Phone">
+                <input type="email" id="doNotSellEmail" placeholder="Email Address">
+                <input type="text" id="doNotSellState" placeholder="State">
+                <label><input type="checkbox" id="doNotSellNotRobot"> I'm not a robot</label>
+                <button onclick="submitDoNotSell()">Submit</button>
+            </div>
+            <div class="do-not-sell-submitted" id="doNotSellSubmitted">Submitted</div>
+        </div>
+        <div class="nav_abt">
+            <button onclick="showMessage('About eNull')">About eNull</button>
+            <button onclick="showMessage('Contact eNull')">Contact eNull</button>
+            <button onclick="showMessage('Help')">Help</button>
+            <button onclick="showMessage('Safety Center')">Safety Center</button>
+            <button onclick="showMessage('Safety Guidelines')">Safety Guidelines</button>
+            <button onclick="showMessage('Common Scams')">Common Scams</button>
+            <button onclick="showMessage('Do Not Sell My Information')">Do Not Sell My Information</button>
+            <button onclick="showMessage('Cookie Policy')">Cookie Policy</button>
+            <button onclick="showMessage('Terms of Use')">Terms of Use</button>
+            <button onclick="showMessage('Fundraising')">Fundraising</button>
+            <button onclick="showMessage('Advertising')">Advertising</button>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(button) {
+            let message = '';
+            let contactForm = document.getElementById('contactForm');
+            let doNotSellForm = document.getElementById('doNotSellForm');
+            switch(button) {
+                case 'About eNull':
+                    message = '<h2>About eNull</h2><p>eNull is a unique online marketplace that specializes in the sale of rare and hard-to-find items. Our platform connects collectors, enthusiasts, and sellers from around the world, providing a space where extraordinary items can be discovered and treasured. We aim to make the process of buying and selling rare items as seamless and secure as possible, ensuring satisfaction for all our users.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Contact eNull':
+                    message = '<h2>Contact eNull</h2><p>If you have any questions, concerns, or need assistance, please do not hesitate to contact us. Our customer support team is available 24/7 to help you with any inquiries you may have. You can reach us via email, phone, or through our online contact form. We strive to provide prompt and helpful responses to ensure your experience with eNull is a positive one.</p>';
+                    contactForm.style.display = 'block';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Help':
+                    message = '<h2>Help</h2><p>Our Help Center is designed to assist you with any issues or questions you may have while using eNull. Here, you will find a comprehensive collection of articles, tutorials, and FAQs that cover a wide range of topics, from account setup to troubleshooting common problems. If you need further assistance, our support team is always ready to help.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Safety Center':
+                    message = '<h2>Safety Center</h2><p>At eNull, your safety is our top priority. Our Safety Center provides valuable information on how to protect yourself while buying and selling online. We offer tips on safe transactions, personal information protection, and how to spot and avoid scams. By following these guidelines, you can ensure a secure and worry-free experience on our platform.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Safety Guidelines':
+                    message = '<h2>Safety Guidelines</h2><p>Our Safety Guidelines are designed to help you navigate eNull safely and securely. These guidelines cover best practices for online transactions, personal information protection, and communication with other users. By adhering to these guidelines, you can minimize risks and ensure a positive experience on our platform.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Common Scams':
+                    message = '<h2>Common Scams</h2><p>Be aware of common scams that may occur on online marketplaces. Our guide provides information on how to identify and avoid fraudulent activities. Learn about the most common types of scams, how to recognize suspicious behavior, and steps you can take to protect yourself from becoming a victim.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Do Not Sell My Information':
+                    message = '<h2>Do Not Sell My Information</h2><p>If you wish to opt-out of having your personal information sold or shared, please complete the form below. This form allows you to request that your data not be sold to third parties. We respect your privacy and are committed to protecting your personal information.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'block';
+                    break;
+                case 'Cookie Policy':
+                    message = '<h2>Cookie Policy</h2><p>Our Cookie Policy explains how we use cookies on our website. Cookies are small data files that are placed on your device to help enhance your browsing experience and analyze our traffic. You can manage your cookie preferences through your browser settings. By continuing to use our site, you consent to our use of cookies.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Terms of Use':
+                    message = '<h2>Terms of Use</h2><p>Our Terms of Use govern your access to and use of the eNull platform. By using our site, you agree to comply with these terms, which include guidelines for acceptable use, content standards, and account responsibilities. Please read these terms carefully to ensure you understand your rights and obligations while using eNull.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Fundraising':
+                    message = '<h2>Fundraising</h2><p>eNull supports fundraising efforts for various causes and organizations. Whether you are looking to raise funds for a charity, community project, or personal cause, our platform provides the tools and resources you need to create and manage successful fundraising campaigns. Join us in making a positive impact by supporting and participating in fundraising initiatives on eNull.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                case 'Advertising':
+                    message = '<h2>Advertising</h2><p>eNull offers advertising opportunities for businesses and individuals looking to promote their products or services to our community of users. Our advertising solutions are designed to help you reach your target audience effectively and achieve your marketing goals. Contact us to learn more about our advertising options and how we can help you grow your brand.</p>';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+                    break;
+                default:
+                    message = '';
+                    contactForm.style.display = 'none';
+                    doNotSellForm.style.display = 'none';
+            }
+            document.getElementById('message').innerHTML = message;
+            document.getElementById('contactSubmitted').style.display = 'none';
+            document.getElementById('doNotSellSubmitted').style.display = 'none';
+        }
+
+        function submitContact() {
+            if (document.getElementById('notRobot').checked) {
+                document.getElementById('contactForm').style.display = 'none';
+                document.getElementById('contactSubmitted').style.display = 'block';
+            } else {
+                alert('Please confirm you are not a robot.');
+            }
+        }
+
+        function submitDoNotSell() {
+            if (document.getElementById('doNotSellNotRobot').checked) {
+                document.getElementById('doNotSellForm').style.display = 'none';
+                document.getElementById('doNotSellSubmitted').style.display = 'block';
+            } else {
+                alert('Please confirm you are not a robot.');
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eNull - Rare Items Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            min-height: 100vh; /* Ensures the body takes up at least the full height of the viewport */
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1; /* Allows the content to grow and take up available space */
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        footer {
+            background-color: #0000FF; /* Same color as the top bar */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed; /* Fixes the footer at the bottom of the page */
+            bottom: 0;
+            left: 0;
+        }
+        .footer-text {
+            font-size: 14px;
+        }
+        .trademark {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main content section has been removed -->
+    </div>
+    <footer>
+        <div class="footer-text">
+            &copy; <span id="year"></span> eNull. All rights reserved. Copyrighted.
+        </div>
+        <div class="trademark">
+            eNull™ is a trademark of eNull Inc. All other trademarks and brands are property of their respective owners.
+        </div>
+    </footer>
+
+    <script>
+        // Update the copyright year automatically
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
